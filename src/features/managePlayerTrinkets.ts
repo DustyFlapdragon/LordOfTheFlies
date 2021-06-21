@@ -1,6 +1,4 @@
-import { trinketsGivenToPlayer } from "../constants";
 import g from "../globals";
-import { getRandomEntryFromMap } from "../misc";
 import Config, { TRINKETS } from "../types/Config";
 
 // here we add all the collectibles to the player
@@ -37,12 +35,17 @@ export function postGameStarted(): void {
 }
 // 100% chance of losing a trinket on taking spider damage
 export function playerTakeDmg(): void {
-  const player = Isaac.GetPlayer(0) as EntityPlayer;
+  const randomTrinket = TRINKETS[Math.floor(Math.random() * TRINKETS.length)];
+  if (randomTrinket !== null) {
+    g.p.TryRemoveTrinket(randomTrinket[1][0]);
+    TRINKETS.splice(TRINKETS.indexOf(randomTrinket), 1);
+    Isaac.DebugString("LotF: lost LotF Item");
+  }
 
-  const randomTrinket = getRandomEntryFromMap(trinketsGivenToPlayer);
+  /* const randomTrinket = getRandomEntryFromMap(trinketsGivenToPlayer);
   if (randomTrinket !== null) {
     player.TryRemoveTrinket(randomTrinket);
     trinketsGivenToPlayer.delete(randomTrinket);
     Isaac.DebugString("LotF: lost LotF trinket");
-  }
+  } */
 }

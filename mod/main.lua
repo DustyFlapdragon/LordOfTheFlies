@@ -1912,6 +1912,114 @@ local globals = __TS__New(Globals)
 ____exports.default = globals
 return ____exports
 end,
+["features.managePlayerItems"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
+require("lualib_bundle");
+local ____exports = {}
+local ____globals = require("globals")
+local g = ____globals.default
+local ____Config = require("types.Config")
+local ITEMS = ____Config.ITEMS
+local removeRandomItem
+function removeRandomItem(self, items, chance, luck)
+    if math.random() <= (chance - luck) then
+        local randomItem = items[math.floor(
+            math.random() * #items
+        ) + 1]
+        if randomItem ~= nil then
+            g.p:RemoveCollectible(randomItem[2][1])
+            __TS__ArraySplice(
+                items,
+                __TS__ArrayIndexOf(items, randomItem),
+                1
+            )
+            Isaac.DebugString("LotF: lost LotF Item")
+        end
+    end
+end
+function ____exports.postGameStarted(self)
+    local player = Isaac.GetPlayer(0)
+    local game = Game()
+    for ____, ____value in ipairs(ITEMS) do
+        local configName
+        configName = ____value[1]
+        local array
+        array = ____value[2]
+        local itemID = table.unpack(array)
+        if g.config[configName] then
+            player:AddCollectible(itemID)
+            game:GetItemPool():RemoveCollectible(itemID)
+            player:RemoveCostume(
+                Isaac.GetItemConfig():GetCollectible(itemID)
+            )
+        end
+    end
+    Isaac.DebugString("LotF: Loaded Selected Items")
+end
+function ____exports.playerTakeDmg(self)
+    local player = Isaac.GetPlayer(0)
+    local luck = ((player.Luck >= 8) and 8) or player.Luck
+    removeRandomItem(nil, ITEMS, 0.9, luck / 10)
+    removeRandomItem(nil, ITEMS, 0.3, luck / 100)
+end
+return ____exports
+end,
+["features.managePlayerTrinkets"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
+require("lualib_bundle");
+local ____exports = {}
+local ____globals = require("globals")
+local g = ____globals.default
+local ____Config = require("types.Config")
+local TRINKETS = ____Config.TRINKETS
+function ____exports.postGameStarted(self)
+    for ____, ____value in ipairs(TRINKETS) do
+        local configName
+        configName = ____value[1]
+        local array
+        array = ____value[2]
+        local itemID = table.unpack(array)
+        local player = Isaac.GetPlayer(0)
+        local game = Game()
+        if g.config[configName] then
+            player:AddTrinket(itemID, false)
+            player:UseActiveItem(CollectibleType.COLLECTIBLE_SMELTER)
+            game:GetItemPool():RemoveTrinket(itemID)
+        end
+    end
+    Isaac.DebugString("LotF: Loaded Selected Trinkets")
+end
+function ____exports.playerTakeDmg(self)
+    local randomTrinket = TRINKETS[math.floor(
+        math.random() * #TRINKETS
+    ) + 1]
+    if randomTrinket ~= nil then
+        g.p:TryRemoveTrinket(randomTrinket[2][1])
+        __TS__ArraySplice(
+            TRINKETS,
+            __TS__ArrayIndexOf(TRINKETS, randomTrinket),
+            1
+        )
+        Isaac.DebugString("LotF: lost LotF Item")
+    end
+end
+return ____exports
+end,
+["callbacks.playerTakeDmg"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
+require("lualib_bundle");
+local ____exports = {}
+local ____constants = require("constants")
+local spiderEnemies = ____constants.spiderEnemies
+local managePlayerItems = require("features.managePlayerItems")
+local managePlayerTrinkets = require("features.managePlayerTrinkets")
+function ____exports.main(self, tookDmg, _dmgAmount, _dmgFlags, dmgSource, _dmgCountdownFrames)
+    if (tookDmg.Type == 1) and (__TS__ArrayIncludes(spiderEnemies, dmgSource.Type) or ((dmgSource.Type == 29) and (dmgSource.Variant == 1))) then
+        managePlayerItems:playerTakeDmg()
+        managePlayerTrinkets:playerTakeDmg()
+        Isaac.DebugString("LotF: Callback triggered: ENTITY_TAKE_DMG")
+    end
+    return nil
+end
+return ____exports
+end,
 ["misc"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 require("lualib_bundle");
 local ____exports = {}
@@ -1938,112 +2046,6 @@ function ____exports.getRandomEntryFromMap(self, map)
             end
             i = i + 1
         end
-    end
-    return nil
-end
-return ____exports
-end,
-["features.managePlayerItems"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
-local ____exports = {}
-local ____constants = require("constants")
-local itemsGivenToPlayer = ____constants.itemsGivenToPlayer
-local ____globals = require("globals")
-local g = ____globals.default
-local ____misc = require("misc")
-local getRandomEntryFromMap = ____misc.getRandomEntryFromMap
-local ____Config = require("types.Config")
-local ITEMS = ____Config.ITEMS
-function ____exports.postGameStarted(self)
-    local player = Isaac.GetPlayer(0)
-    local game = Game()
-    for ____, ____value in ipairs(ITEMS) do
-        local configName
-        configName = ____value[1]
-        local array
-        array = ____value[2]
-        local itemID = table.unpack(array)
-        if g.config[configName] then
-            player:AddCollectible(itemID)
-            game:GetItemPool():RemoveCollectible(itemID)
-            player:RemoveCostume(
-                Isaac.GetItemConfig():GetCollectible(itemID)
-            )
-        end
-    end
-    Isaac.DebugString("LotF: Loaded Selected Items")
-end
-function ____exports.playerTakeDmg(self)
-    local player = Isaac.GetPlayer(0)
-    local luck = ((player.Luck >= 8) and 8) or player.Luck
-    if math.random() <= (0.9 - (luck / 10)) then
-        local randomItem = getRandomEntryFromMap(nil, itemsGivenToPlayer)
-        if randomItem ~= nil then
-            player:RemoveCollectible(randomItem)
-            itemsGivenToPlayer:delete(randomItem)
-            Isaac.DebugString("LotF: lost LotF Item")
-        end
-    end
-    if math.random() <= (0.3 - (luck / 100)) then
-        local randomItem = getRandomEntryFromMap(nil, itemsGivenToPlayer)
-        if randomItem then
-            player:RemoveCollectible(randomItem)
-            itemsGivenToPlayer:delete(randomItem)
-            Isaac.DebugString("LotF: lost LotF Item")
-        end
-    end
-end
-return ____exports
-end,
-["features.managePlayerTrinkets"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
-local ____exports = {}
-local ____constants = require("constants")
-local trinketsGivenToPlayer = ____constants.trinketsGivenToPlayer
-local ____globals = require("globals")
-local g = ____globals.default
-local ____misc = require("misc")
-local getRandomEntryFromMap = ____misc.getRandomEntryFromMap
-local ____Config = require("types.Config")
-local TRINKETS = ____Config.TRINKETS
-function ____exports.postGameStarted(self)
-    for ____, ____value in ipairs(TRINKETS) do
-        local configName
-        configName = ____value[1]
-        local array
-        array = ____value[2]
-        local itemID = table.unpack(array)
-        local player = Isaac.GetPlayer(0)
-        local game = Game()
-        if g.config[configName] then
-            player:AddTrinket(itemID, false)
-            player:UseActiveItem(CollectibleType.COLLECTIBLE_SMELTER)
-            game:GetItemPool():RemoveTrinket(itemID)
-        end
-    end
-    Isaac.DebugString("LotF: Loaded Selected Trinkets")
-end
-function ____exports.playerTakeDmg(self)
-    local player = Isaac.GetPlayer(0)
-    local randomTrinket = getRandomEntryFromMap(nil, trinketsGivenToPlayer)
-    if randomTrinket ~= nil then
-        player:TryRemoveTrinket(randomTrinket)
-        trinketsGivenToPlayer:delete(randomTrinket)
-        Isaac.DebugString("LotF: lost LotF trinket")
-    end
-end
-return ____exports
-end,
-["callbacks.playerTakeDmg"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
-require("lualib_bundle");
-local ____exports = {}
-local ____constants = require("constants")
-local spiderEnemies = ____constants.spiderEnemies
-local managePlayerItems = require("features.managePlayerItems")
-local managePlayerTrinkets = require("features.managePlayerTrinkets")
-function ____exports.main(self, tookDmg, _dmgAmount, _dmgFlags, dmgSource, _dmgCountdownFrames)
-    if (tookDmg.Type == 1) and (__TS__ArrayIncludes(spiderEnemies, dmgSource.Type) or ((dmgSource.Type == 29) and (dmgSource.Variant == 1))) then
-        managePlayerItems:playerTakeDmg()
-        managePlayerTrinkets:playerTakeDmg()
-        Isaac.DebugString("LotF: Callback triggered: ENTITY_TAKE_DMG")
     end
     return nil
 end

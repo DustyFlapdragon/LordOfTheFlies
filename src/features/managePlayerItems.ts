@@ -1,7 +1,5 @@
-import { itemsGivenToPlayer } from "../constants";
 import g from "../globals";
-import { getRandomEntryFromMap } from "../misc";
-import Config, { ITEMS } from "../types/Config";
+import Config, { ConfigArray, ITEMS } from "../types/Config";
 
 // Add all the collectibles to the player
 export function postGameStarted(): void {
@@ -41,20 +39,38 @@ export function playerTakeDmg(): void {
   const luck = player.Luck >= 8 ? 8 : player.Luck;
 
   // default 90% chance play loses an item minus the luck stat, lowest chance 82%
-  if (math.random() <= 0.9 - luck / 10) {
-    const randomItem = getRandomEntryFromMap(itemsGivenToPlayer);
+  removeRandomItem(ITEMS, 0.9, luck / 10);
+  /* if (math.random() <= 0.9 - luck / 10) {
+    const randomItem = ITEMS[Math.floor(Math.random() * ITEMS.length)];
     if (randomItem !== null) {
-      player.RemoveCollectible(randomItem);
-      itemsGivenToPlayer.delete(randomItem);
+      player.RemoveCollectible(randomItem[1][0]);
+      ITEMS.splice(ITEMS.indexOf(randomItem), 1);
       Isaac.DebugString("LotF: lost LotF Item");
     }
-  }
+  } */
   // default 30% chance player loses an item minus the luck stat, lowest change 22%
-  if (math.random() <= 0.3 - luck / 100) {
+  removeRandomItem(ITEMS, 0.3, luck / 100);
+  /* if (math.random() <= 0.3 - luck / 100) {
     const randomItem = getRandomEntryFromMap(itemsGivenToPlayer);
     if (randomItem) {
       player.RemoveCollectible(randomItem);
       itemsGivenToPlayer.delete(randomItem);
+      Isaac.DebugString("LotF: lost LotF Item");
+    }
+  } */
+}
+
+// remove a random item from the player and the items array
+function removeRandomItem(
+  items: ConfigArray,
+  chance: number,
+  luck: number,
+): void {
+  if (math.random() <= chance - luck) {
+    const randomItem = items[Math.floor(Math.random() * items.length)];
+    if (randomItem !== null) {
+      g.p.RemoveCollectible(randomItem[1][0]);
+      items.splice(items.indexOf(randomItem), 1);
       Isaac.DebugString("LotF: lost LotF Item");
     }
   }
