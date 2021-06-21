@@ -18,5 +18,4 @@ export const spiderEnemies = [
   EntityType.ENTITY_CRAZY_LONG_LEGS,
   EntityType.ENTITY_DADDYLONGLEGS, // boss
   EntityType.ENTITY_WIDOW, // boss
-  EntityType.ENTITY_FIREPLACE,
 ];
