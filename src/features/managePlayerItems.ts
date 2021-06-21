@@ -3,8 +3,11 @@ import Config, { ConfigArray, ITEMS } from "../types/Config";
 
 // Add all the collectibles to the player
 export function postGameStarted(): void {
+  // reset our globals on start as this is a new game
+  g.itemsAvailable = [...ITEMS];
+
   // loop through our optional items and check if we should process them
-  for (const [configName, array] of ITEMS) {
+  for (const [configName, array] of g.itemsAvailable) {
     const [itemID] = array;
 
     // Check our config to see if the preference has been changed to false
@@ -28,10 +31,10 @@ export function playerTakeDmg(): void {
   const luck = g.p.Luck >= 8 ? 8 : g.p.Luck;
 
   // default 90% chance player loses an item minus the luck stat, lowest chance 82%
-  removeRandomItem(ITEMS, 0.9, luck / 10);
+  removeRandomItem(g.itemsAvailable, 0.9, luck / 10);
 
   // default 30% chance player loses an item minus the luck stat, lowest change 22%
-  removeRandomItem(ITEMS, 0.3, luck / 100);
+  removeRandomItem(g.itemsAvailable, 0.3, luck / 100);
 }
 
 // remove a random item from the player and the items array

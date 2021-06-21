@@ -3,6 +3,8 @@ import Config, { TRINKETS } from "../types/Config";
 
 // Add all the Trinkets to the player
 export function postGameStarted(): void {
+  // reset our trinkets as this is a new game
+  g.trinketsAvailable = [...TRINKETS];
   // loop through our optional trinket and check if we should process them
   for (const [configName, array] of TRINKETS) {
     const [itemID] = array;
@@ -25,7 +27,8 @@ export function postGameStarted(): void {
 // remove a trinket from the player when they take damage from spiders (100% chance)
 export function playerTakeDmg(): void {
   // get a random trinket from the Trinkets array
-  const randomTrinket = TRINKETS[Math.floor(Math.random() * TRINKETS.length)];
+  const randomTrinket =
+    g.trinketsAvailable[Math.floor(Math.random() * g.trinketsAvailable.length)];
 
   // make sure we have a random item
   if (randomTrinket !== null) {

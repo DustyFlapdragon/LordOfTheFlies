@@ -1,4 +1,4 @@
-import Config from "./Config";
+import Config, { ITEMS, TRINKETS } from "./Config";
 
 // lets set up a bunch of globals so that we don't have to call them everywhere
 export default class Globals {
@@ -12,4 +12,6 @@ export default class Globals {
   itemPool = Game().GetItemPool();
   itemConfig = Isaac.GetItemConfig();
   config = new Config();
+  trinketsAvailable = [...TRINKETS];
+  itemsAvailable = [...ITEMS];
 }

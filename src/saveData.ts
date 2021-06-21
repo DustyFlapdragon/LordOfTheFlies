@@ -1,6 +1,7 @@
 import * as json from "json";
 import g from "./globals";
-import Config from "./types/Config";
+import Config, { ConfigArray } from "./types/Config";
+import SaveData from "./types/SaveData";
 
 let mod: Mod | null = null;
 
@@ -12,8 +13,14 @@ export function save(): void {
     error('"saveDat.save()" was called without the mod being initialized.');
   }
 
-  const encodedData = json.encode(g.config);
-  mod.SaveData(encodedData);
+  // build what we need to save
+  const saveData = {
+    config: g.config,
+    itemsAvailable: g.itemsAvailable,
+    trinketsAvailable: g.trinketsAvailable,
+  };
+
+  mod.SaveData(json.encode(saveData));
 }
 
 export function load(): void {
@@ -24,14 +31,27 @@ export function load(): void {
   if (!Isaac.HasModData(mod)) {
     return;
   }
-
   // get the save data and decode it
-  const saveData = json.decode(Isaac.LoadModData(mod)) as Config;
-
+  const saveData = json.decode(Isaac.LoadModData(mod)) as SaveData;
+  const config = saveData.config as Config;
   // set our config based on the saveData
-  Object.entries(saveData).forEach(([key, value]) =>
+  Object.entries(config).forEach(([key, value]) =>
     setConfigOption(key as keyof Config, value),
   );
+}
+
+export function loadPreviousGameData(): void {
+  if (mod === null) {
+    error('"saveDat.load()" was called without the mod being initialized.');
+  }
+  // check we have some save data file
+  if (!Isaac.HasModData(mod)) {
+    return;
+  }
+  // get the save data and decode it
+  const saveData = json.decode(Isaac.LoadModData(mod)) as SaveData;
+  g.trinketsAvailable = saveData.trinketsAvailable as ConfigArray;
+  g.itemsAvailable = saveData.itemsAvailable as ConfigArray;
 }
 
 // set our global configs based on the save data

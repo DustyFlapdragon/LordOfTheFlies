@@ -1883,6 +1883,8 @@ require("lualib_bundle");
 local ____exports = {}
 local ____Config = require("types.Config")
 local Config = ____Config.default
+local ITEMS = ____Config.ITEMS
+local TRINKETS = ____Config.TRINKETS
 ____exports.default = (function()
     ____exports.default = __TS__Class()
     local Globals = ____exports.default
@@ -1895,6 +1897,12 @@ ____exports.default = (function()
         self.itemPool = Game():GetItemPool()
         self.itemConfig = Isaac.GetItemConfig()
         self.config = __TS__New(Config)
+        self.trinketsAvailable = {
+            table.unpack(TRINKETS)
+        }
+        self.itemsAvailable = {
+            table.unpack(ITEMS)
+        }
     end
     return Globals
 end)()
@@ -1934,7 +1942,10 @@ function removeRandomItem(self, items, chance, luck)
     end
 end
 function ____exports.postGameStarted(self)
-    for ____, ____value in ipairs(ITEMS) do
+    g.itemsAvailable = {
+        table.unpack(ITEMS)
+    }
+    for ____, ____value in ipairs(g.itemsAvailable) do
         local configName
         configName = ____value[1]
         local array
@@ -1952,8 +1963,8 @@ function ____exports.postGameStarted(self)
 end
 function ____exports.playerTakeDmg(self)
     local luck = ((g.p.Luck >= 8) and 8) or g.p.Luck
-    removeRandomItem(nil, ITEMS, 0.9, luck / 10)
-    removeRandomItem(nil, ITEMS, 0.3, luck / 100)
+    removeRandomItem(nil, g.itemsAvailable, 0.9, luck / 10)
+    removeRandomItem(nil, g.itemsAvailable, 0.3, luck / 100)
 end
 return ____exports
 end,
@@ -1965,6 +1976,9 @@ local g = ____globals.default
 local ____Config = require("types.Config")
 local TRINKETS = ____Config.TRINKETS
 function ____exports.postGameStarted(self)
+    g.trinketsAvailable = {
+        table.unpack(TRINKETS)
+    }
     for ____, ____value in ipairs(TRINKETS) do
         local configName
         configName = ____value[1]
@@ -1980,8 +1994,8 @@ function ____exports.postGameStarted(self)
     Isaac.DebugString("LotF: Loaded Selected Trinkets")
 end
 function ____exports.playerTakeDmg(self)
-    local randomTrinket = TRINKETS[math.floor(
-        math.random() * #TRINKETS
+    local randomTrinket = g.trinketsAvailable[math.floor(
+        math.random() * #g.trinketsAvailable
     ) + 1]
     if randomTrinket ~= nil then
         g.p:TryRemoveTrinket(randomTrinket[2][1])
@@ -2024,28 +2038,8 @@ function ____exports.isNewStandardGame(self, isContinue)
 end
 return ____exports
 end,
-["callbacks.postGameStarted"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
+["types.SaveData"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 local ____exports = {}
-local managePlayerItems = require("features.managePlayerItems")
-local managePlayerTrinkets = require("features.managePlayerTrinkets")
-local ____misc = require("misc")
-local isNewStandardGame = ____misc.isNewStandardGame
-function ____exports.main(self, isContinue)
-    if isNewStandardGame(nil, isContinue) then
-        managePlayerItems:postGameStarted()
-        managePlayerTrinkets:postGameStarted()
-        Isaac.DebugString("LotF: Callback triggered: MC_POST_GAME_STARTED")
-    end
-end
-return ____exports
-end,
-["callbacks.postPlayerInit"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
-local ____exports = {}
-local ____globals = require("globals")
-local g = ____globals.default
-function ____exports.main(self, player)
-    g.p = player
-end
 return ____exports
 end,
 ["saveData"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
@@ -2065,8 +2059,10 @@ function ____exports.save(self)
     if mod == nil then
         error("\"saveDat.save()\" was called without the mod being initialized.")
     end
-    local encodedData = json.encode(g.config)
-    mod:SaveData(encodedData)
+    local saveData = {config = g.config, itemsAvailable = g.itemsAvailable, trinketsAvailable = g.trinketsAvailable}
+    mod:SaveData(
+        json.encode(saveData)
+    )
 end
 function ____exports.load(self)
     if mod == nil then
@@ -2078,8 +2074,9 @@ function ____exports.load(self)
     local saveData = json.decode(
         Isaac.LoadModData(mod)
     )
+    local config = saveData.config
     __TS__ArrayForEach(
-        __TS__ObjectEntries(saveData),
+        __TS__ObjectEntries(config),
         function(____, ____bindingPattern0)
             local key
             key = ____bindingPattern0[1]
@@ -2088,6 +2085,47 @@ function ____exports.load(self)
             return ____exports.setConfigOption(nil, key, value)
         end
     )
+end
+function ____exports.loadPreviousGameData(self)
+    if mod == nil then
+        error("\"saveDat.load()\" was called without the mod being initialized.")
+    end
+    if not Isaac.HasModData(mod) then
+        return
+    end
+    local saveData = json.decode(
+        Isaac.LoadModData(mod)
+    )
+    g.trinketsAvailable = saveData.trinketsAvailable
+    g.itemsAvailable = saveData.itemsAvailable
+end
+return ____exports
+end,
+["callbacks.postGameStarted"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
+local ____exports = {}
+local managePlayerItems = require("features.managePlayerItems")
+local managePlayerTrinkets = require("features.managePlayerTrinkets")
+local ____misc = require("misc")
+local isNewStandardGame = ____misc.isNewStandardGame
+local saveData = require("saveData")
+function ____exports.main(self, isContinue)
+    if isContinue == true then
+        saveData:loadPreviousGameData()
+    end
+    if isNewStandardGame(nil, isContinue) then
+        managePlayerItems:postGameStarted()
+        managePlayerTrinkets:postGameStarted()
+        Isaac.DebugString("LotF: Callback triggered: MC_POST_GAME_STARTED")
+    end
+end
+return ____exports
+end,
+["callbacks.postPlayerInit"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
+local ____exports = {}
+local ____globals = require("globals")
+local g = ____globals.default
+function ____exports.main(self, player)
+    g.p = player
 end
 return ____exports
 end,
