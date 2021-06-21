@@ -3,7 +3,7 @@ import * as managePlayerItems from "../features/managePlayerItems";
 import * as managePlayerTrinkets from "../features/managePlayerTrinkets";
 
 // we only manage items if its in the spider array and the player is damaged
-// also account for Trite
+// also account for Trite (29.1)
 export function main(
   tookDmg: Entity,
   _dmgAmount: float,

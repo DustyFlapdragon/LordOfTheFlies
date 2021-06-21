@@ -1833,11 +1833,8 @@ end
 
 end,
 ["constants"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
-require("lualib_bundle");
 local ____exports = {}
 ____exports.VERSION = "0.0.1"
-____exports.trinketsGivenToPlayer = __TS__New(Map, {{TrinketType.TRINKET_LOCUST_OF_WRATH, true}, {TrinketType.TRINKET_LOCUST_OF_PESTILENCE, true}, {TrinketType.TRINKET_LOCUST_OF_FAMINE, true}, {TrinketType.TRINKET_LOCUST_OF_DEATH, true}, {TrinketType.TRINKET_LOCUST_OF_CONQUEST, true}, {TrinketType.TRINKET_APOLLYONS_BEST_FRIEND, true}})
-____exports.itemsGivenToPlayer = __TS__New(Map, {{CollectibleType.COLLECTIBLE_SMART_FLY, true}, {CollectibleType.COLLECTIBLE_PSY_FLY, true}, {CollectibleType.COLLECTIBLE_LOST_FLY, true}, {CollectibleType.COLLECTIBLE_PAPA_FLY, true}, {CollectibleType.COLLECTIBLE_SWARM, true}, {CollectibleType.COLLECTIBLE_ANGRY_FLY, true}, {CollectibleType.COLLECTIBLE_BOT_FLY, true}, {CollectibleType.COLLECTIBLE_FRUITY_PLUM, true}, {CollectibleType.COLLECTIBLE_SKATOLE, true}, {CollectibleType.COLLECTIBLE_HALO_OF_FLIES, true}, {CollectibleType.COLLECTIBLE_DISTANT_ADMIRATION, true}, {CollectibleType.COLLECTIBLE_FOREVER_ALONE, true}, {CollectibleType.COLLECTIBLE_BBF, true}, {CollectibleType.COLLECTIBLE_BIG_FAN, true}, {CollectibleType.COLLECTIBLE_FRIEND_ZONE, true}, {CollectibleType.COLLECTIBLE_OBSESSED_FAN, true}, {CollectibleType.COLLECTIBLE_BLUE_BABYS_ONLY_FRIEND, true}, {CollectibleType.COLLECTIBLE_MULLIGAN, true}})
 ____exports.spiderEnemies = {EntityType.ENTITY_SPIDER, EntityType.ENTITY_BIGSPIDER, EntityType.ENTITY_SPIDER_L2, EntityType.ENTITY_TICKING_SPIDER, EntityType.ENTITY_ROCK_SPIDER, EntityType.ENTITY_SWARM_SPIDER, EntityType.ENTITY_STRIDER, EntityType.ENTITY_MIGRAINE, EntityType.ENTITY_RAGLING, EntityType.ENTITY_BLISTER, EntityType.ENTITY_TWITCHY, EntityType.ENTITY_BABY_LONG_LEGS, EntityType.ENTITY_CRAZY_LONG_LEGS, EntityType.ENTITY_DADDYLONGLEGS, EntityType.ENTITY_WIDOW, EntityType.ENTITY_FIREPLACE}
 return ____exports
 end,
@@ -1877,8 +1874,8 @@ ____exports.default = (function()
     end
     return Config
 end)()
-____exports.TRINKETS = {{"locustOfWar", {TrinketType.TRINKET_LOCUST_OF_WRATH, 4, true}}, {"locustOfPestilence", {TrinketType.TRINKET_LOCUST_OF_PESTILENCE, 4, true}}, {"locustOfFamine", {TrinketType.TRINKET_LOCUST_OF_FAMINE, 4, true}}, {"locustOfDeath", {TrinketType.TRINKET_LOCUST_OF_DEATH, 4, true}}, {"locustOfConquest", {TrinketType.TRINKET_LOCUST_OF_CONQUEST, 4, true}}, {"appolyonsBestFriend", {TrinketType.TRINKET_APOLLYONS_BEST_FRIEND, 4, true}}}
-____exports.ITEMS = {{"smartFly", {CollectibleType.COLLECTIBLE_SMART_FLY, 4, true}}, {"psyFly", {CollectibleType.COLLECTIBLE_PSY_FLY, 4, true}}, {"lostFly", {CollectibleType.COLLECTIBLE_LOST_FLY, 4, true}}, {"papaFly", {CollectibleType.COLLECTIBLE_PAPA_FLY, 4, true}}, {"theSwarm", {CollectibleType.COLLECTIBLE_SWARM, 4, true}}, {"angryFly", {CollectibleType.COLLECTIBLE_ANGRY_FLY, 4, true}}, {"botFly", {CollectibleType.COLLECTIBLE_BOT_FLY, 4, true}}, {"fruityPlum", {CollectibleType.COLLECTIBLE_FRUITY_PLUM, 4, true}}, {"skatole", {CollectibleType.COLLECTIBLE_SKATOLE, 4, true}}, {"haloOfFlies", {CollectibleType.COLLECTIBLE_HALO_OF_FLIES, 4, true}}, {"distantAdmiration", {CollectibleType.COLLECTIBLE_DISTANT_ADMIRATION, 4, true}}, {"foreverAlone", {CollectibleType.COLLECTIBLE_FOREVER_ALONE, 4, true}}, {"bbf", {CollectibleType.COLLECTIBLE_BBF, 4, true}}, {"bigFan", {CollectibleType.COLLECTIBLE_BIG_FAN, 4, true}}, {"friendZone", {CollectibleType.COLLECTIBLE_FRIEND_ZONE, 4, true}}, {"obsessedFan", {CollectibleType.COLLECTIBLE_OBSESSED_FAN, 4, true}}, {"blueBabysOnlyFriend", {CollectibleType.COLLECTIBLE_BLUE_BABYS_ONLY_FRIEND, 4, true}}, {"theMulligan", {CollectibleType.COLLECTIBLE_MULLIGAN, 4, true}}}
+____exports.TRINKETS = {{"locustOfWar", {TrinketType.TRINKET_LOCUST_OF_WRATH, 4}}, {"locustOfPestilence", {TrinketType.TRINKET_LOCUST_OF_PESTILENCE, 4}}, {"locustOfFamine", {TrinketType.TRINKET_LOCUST_OF_FAMINE, 4}}, {"locustOfDeath", {TrinketType.TRINKET_LOCUST_OF_DEATH, 4}}, {"locustOfConquest", {TrinketType.TRINKET_LOCUST_OF_CONQUEST, 4}}, {"appolyonsBestFriend", {TrinketType.TRINKET_APOLLYONS_BEST_FRIEND, 4}}}
+____exports.ITEMS = {{"smartFly", {CollectibleType.COLLECTIBLE_SMART_FLY, 4}}, {"psyFly", {CollectibleType.COLLECTIBLE_PSY_FLY, 4}}, {"lostFly", {CollectibleType.COLLECTIBLE_LOST_FLY, 4}}, {"papaFly", {CollectibleType.COLLECTIBLE_PAPA_FLY, 4}}, {"theSwarm", {CollectibleType.COLLECTIBLE_SWARM, 4}}, {"angryFly", {CollectibleType.COLLECTIBLE_ANGRY_FLY, 4}}, {"botFly", {CollectibleType.COLLECTIBLE_BOT_FLY, 4}}, {"fruityPlum", {CollectibleType.COLLECTIBLE_FRUITY_PLUM, 4}}, {"skatole", {CollectibleType.COLLECTIBLE_SKATOLE, 4}}, {"haloOfFlies", {CollectibleType.COLLECTIBLE_HALO_OF_FLIES, 4}}, {"distantAdmiration", {CollectibleType.COLLECTIBLE_DISTANT_ADMIRATION, 4}}, {"foreverAlone", {CollectibleType.COLLECTIBLE_FOREVER_ALONE, 4}}, {"bbf", {CollectibleType.COLLECTIBLE_BBF, 4}}, {"bigFan", {CollectibleType.COLLECTIBLE_BIG_FAN, 4}}, {"friendZone", {CollectibleType.COLLECTIBLE_FRIEND_ZONE, 4}}, {"obsessedFan", {CollectibleType.COLLECTIBLE_OBSESSED_FAN, 4}}, {"blueBabysOnlyFriend", {CollectibleType.COLLECTIBLE_BLUE_BABYS_ONLY_FRIEND, 4}}, {"theMulligan", {CollectibleType.COLLECTIBLE_MULLIGAN, 4}}}
 return ____exports
 end,
 ["types.Globals"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
@@ -1937,8 +1934,6 @@ function removeRandomItem(self, items, chance, luck)
     end
 end
 function ____exports.postGameStarted(self)
-    local player = Isaac.GetPlayer(0)
-    local game = Game()
     for ____, ____value in ipairs(ITEMS) do
         local configName
         configName = ____value[1]
@@ -1946,18 +1941,17 @@ function ____exports.postGameStarted(self)
         array = ____value[2]
         local itemID = table.unpack(array)
         if g.config[configName] then
-            player:AddCollectible(itemID)
-            game:GetItemPool():RemoveCollectible(itemID)
-            player:RemoveCostume(
-                Isaac.GetItemConfig():GetCollectible(itemID)
+            g.p:AddCollectible(itemID)
+            g.itemPool:RemoveCollectible(itemID)
+            g.p:RemoveCostume(
+                g.itemConfig:GetCollectible(itemID)
             )
         end
     end
     Isaac.DebugString("LotF: Loaded Selected Items")
 end
 function ____exports.playerTakeDmg(self)
-    local player = Isaac.GetPlayer(0)
-    local luck = ((player.Luck >= 8) and 8) or player.Luck
+    local luck = ((g.p.Luck >= 8) and 8) or g.p.Luck
     removeRandomItem(nil, ITEMS, 0.9, luck / 10)
     removeRandomItem(nil, ITEMS, 0.3, luck / 100)
 end
@@ -1977,12 +1971,10 @@ function ____exports.postGameStarted(self)
         local array
         array = ____value[2]
         local itemID = table.unpack(array)
-        local player = Isaac.GetPlayer(0)
-        local game = Game()
         if g.config[configName] then
-            player:AddTrinket(itemID, false)
-            player:UseActiveItem(CollectibleType.COLLECTIBLE_SMELTER)
-            game:GetItemPool():RemoveTrinket(itemID)
+            g.p:AddTrinket(itemID, false)
+            g.p:UseActiveItem(CollectibleType.COLLECTIBLE_SMELTER)
+            g.g:GetItemPool():RemoveTrinket(itemID)
         end
     end
     Isaac.DebugString("LotF: Loaded Selected Trinkets")
@@ -2021,33 +2013,14 @@ end
 return ____exports
 end,
 ["misc"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
-require("lualib_bundle");
 local ____exports = {}
+local ____globals = require("globals")
+local g = ____globals.default
 function ____exports.isNewStandardGame(self, isContinue)
-    local game = Game()
-    if ((game:IsGreedMode() == false) and (game.Challenge == Challenge.CHALLENGE_NULL)) and (isContinue == false) then
+    if ((g.g:IsGreedMode() == false) and (g.g.Challenge == Challenge.CHALLENGE_NULL)) and (isContinue == false) then
         return true
     end
     return false
-end
-function ____exports.getRandomEntryFromMap(self, map)
-    if map.size > 0 then
-        local randomNumber = math.random(1, map.size)
-        local i = 1
-        for ____, ____value in __TS__Iterator(
-            map:entries()
-        ) do
-            local itemID
-            itemID = ____value[1]
-            local option
-            option = ____value[2]
-            if (i == randomNumber) and option then
-                return itemID
-            end
-            i = i + 1
-        end
-    end
-    return nil
 end
 return ____exports
 end,

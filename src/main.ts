@@ -8,7 +8,7 @@ import * as saveData from "./saveData";
 // Register the mod
 const LordOfTheFlies = RegisterMod("LordOfTheFlies", 1);
 
-// set our mod and load teh savedata
+// set our mod and load the savedata
 saveData.setMod(LordOfTheFlies);
 saveData.load();
 
@@ -27,7 +27,8 @@ LordOfTheFlies.AddCallback(
   postPlayerInit.main,
 );
 LordOfTheFlies.AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, preGameExit.main);
-// setup mod config
+
+// setup mod config menu
 modConfigMenu.register();
-// Print an initialization message to the "log.txt" file
+
 Isaac.DebugString("LordOfTheFlies initialized.");

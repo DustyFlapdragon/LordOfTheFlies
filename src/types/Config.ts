@@ -1,4 +1,5 @@
-// order needs to match TRINKETS & ITEMS
+// this is our list of configurable options
+// these should match the config array keys
 export default class Config {
   // Trinkets
   locustOfWar = true;
@@ -30,63 +31,41 @@ export default class Config {
   theMulligan = true;
 }
 
-// the ConfigArray has uses the key of Config
+// the ConfigArray uses the key of Config
 export type ConfigArray = Array<
   [
     keyof Config | null,
-    [TrinketType | CollectibleType, ModConfigMenuOptionType, boolean],
+    [TrinketType | CollectibleType, ModConfigMenuOptionType],
   ]
 >;
 
 // Hold all of our trinkets and config settings
-// by default everything is turned on
 export const TRINKETS: ConfigArray = [
   [
     "locustOfWar",
-    [
-      TrinketType.TRINKET_LOCUST_OF_WRATH,
-      ModConfigMenuOptionType.BOOLEAN,
-      true,
-    ],
+    [TrinketType.TRINKET_LOCUST_OF_WRATH, ModConfigMenuOptionType.BOOLEAN],
   ],
   [
     "locustOfPestilence",
-    [
-      TrinketType.TRINKET_LOCUST_OF_PESTILENCE,
-      ModConfigMenuOptionType.BOOLEAN,
-      true,
-    ],
+    [TrinketType.TRINKET_LOCUST_OF_PESTILENCE, ModConfigMenuOptionType.BOOLEAN],
   ],
   [
     "locustOfFamine",
-    [
-      TrinketType.TRINKET_LOCUST_OF_FAMINE,
-      ModConfigMenuOptionType.BOOLEAN,
-      true,
-    ],
+    [TrinketType.TRINKET_LOCUST_OF_FAMINE, ModConfigMenuOptionType.BOOLEAN],
   ],
   [
     "locustOfDeath",
-    [
-      TrinketType.TRINKET_LOCUST_OF_DEATH,
-      ModConfigMenuOptionType.BOOLEAN,
-      true,
-    ],
+    [TrinketType.TRINKET_LOCUST_OF_DEATH, ModConfigMenuOptionType.BOOLEAN],
   ],
   [
     "locustOfConquest",
-    [
-      TrinketType.TRINKET_LOCUST_OF_CONQUEST,
-      ModConfigMenuOptionType.BOOLEAN,
-      true,
-    ],
+    [TrinketType.TRINKET_LOCUST_OF_CONQUEST, ModConfigMenuOptionType.BOOLEAN],
   ],
   [
     "appolyonsBestFriend",
     [
       TrinketType.TRINKET_APOLLYONS_BEST_FRIEND,
       ModConfigMenuOptionType.BOOLEAN,
-      true,
     ],
   ],
 ];
@@ -96,78 +75,45 @@ export const TRINKETS: ConfigArray = [
 export const ITEMS: ConfigArray = [
   [
     "smartFly",
-    [
-      CollectibleType.COLLECTIBLE_SMART_FLY,
-      ModConfigMenuOptionType.BOOLEAN,
-      true,
-    ],
+    [CollectibleType.COLLECTIBLE_SMART_FLY, ModConfigMenuOptionType.BOOLEAN],
   ],
   [
     "psyFly",
-    [
-      CollectibleType.COLLECTIBLE_PSY_FLY,
-      ModConfigMenuOptionType.BOOLEAN,
-      true,
-    ],
+    [CollectibleType.COLLECTIBLE_PSY_FLY, ModConfigMenuOptionType.BOOLEAN],
   ],
   [
     "lostFly",
-    [
-      CollectibleType.COLLECTIBLE_LOST_FLY,
-      ModConfigMenuOptionType.BOOLEAN,
-      true,
-    ],
+    [CollectibleType.COLLECTIBLE_LOST_FLY, ModConfigMenuOptionType.BOOLEAN],
   ],
   [
     "papaFly",
-    [
-      CollectibleType.COLLECTIBLE_PAPA_FLY,
-      ModConfigMenuOptionType.BOOLEAN,
-      true,
-    ],
+    [CollectibleType.COLLECTIBLE_PAPA_FLY, ModConfigMenuOptionType.BOOLEAN],
   ],
   [
     "theSwarm",
-    [CollectibleType.COLLECTIBLE_SWARM, ModConfigMenuOptionType.BOOLEAN, true],
+    [CollectibleType.COLLECTIBLE_SWARM, ModConfigMenuOptionType.BOOLEAN],
   ],
   [
     "angryFly",
-    [
-      CollectibleType.COLLECTIBLE_ANGRY_FLY,
-      ModConfigMenuOptionType.BOOLEAN,
-      true,
-    ],
+    [CollectibleType.COLLECTIBLE_ANGRY_FLY, ModConfigMenuOptionType.BOOLEAN],
   ],
   [
     "botFly",
-    [
-      CollectibleType.COLLECTIBLE_BOT_FLY,
-      ModConfigMenuOptionType.BOOLEAN,
-      true,
-    ],
+    [CollectibleType.COLLECTIBLE_BOT_FLY, ModConfigMenuOptionType.BOOLEAN],
   ],
   [
     "fruityPlum",
-    [
-      CollectibleType.COLLECTIBLE_FRUITY_PLUM,
-      ModConfigMenuOptionType.BOOLEAN,
-      true,
-    ],
+    [CollectibleType.COLLECTIBLE_FRUITY_PLUM, ModConfigMenuOptionType.BOOLEAN],
   ],
   [
     "skatole",
-    [
-      CollectibleType.COLLECTIBLE_SKATOLE,
-      ModConfigMenuOptionType.BOOLEAN,
-      true,
-    ],
+    [CollectibleType.COLLECTIBLE_SKATOLE, ModConfigMenuOptionType.BOOLEAN],
   ],
   [
     "haloOfFlies",
     [
       CollectibleType.COLLECTIBLE_HALO_OF_FLIES,
       ModConfigMenuOptionType.BOOLEAN,
-      true,
     ],
   ],
   [
@@ -175,7 +121,6 @@ export const ITEMS: ConfigArray = [
     [
       CollectibleType.COLLECTIBLE_DISTANT_ADMIRATION,
       ModConfigMenuOptionType.BOOLEAN,
-      true,
     ],
   ],
   [
@@ -183,51 +128,30 @@ export const ITEMS: ConfigArray = [
     [
       CollectibleType.COLLECTIBLE_FOREVER_ALONE,
       ModConfigMenuOptionType.BOOLEAN,
-      true,
     ],
   ],
-  [
-    "bbf",
-    [CollectibleType.COLLECTIBLE_BBF, ModConfigMenuOptionType.BOOLEAN, true],
-  ],
+  ["bbf", [CollectibleType.COLLECTIBLE_BBF, ModConfigMenuOptionType.BOOLEAN]],
   [
     "bigFan",
-    [
-      CollectibleType.COLLECTIBLE_BIG_FAN,
-      ModConfigMenuOptionType.BOOLEAN,
-      true,
-    ],
+    [CollectibleType.COLLECTIBLE_BIG_FAN, ModConfigMenuOptionType.BOOLEAN],
   ],
   [
     "friendZone",
-    [
-      CollectibleType.COLLECTIBLE_FRIEND_ZONE,
-      ModConfigMenuOptionType.BOOLEAN,
-      true,
-    ],
+    [CollectibleType.COLLECTIBLE_FRIEND_ZONE, ModConfigMenuOptionType.BOOLEAN],
   ],
   [
     "obsessedFan",
-    [
-      CollectibleType.COLLECTIBLE_OBSESSED_FAN,
-      ModConfigMenuOptionType.BOOLEAN,
-      true,
-    ],
+    [CollectibleType.COLLECTIBLE_OBSESSED_FAN, ModConfigMenuOptionType.BOOLEAN],
   ],
   [
     "blueBabysOnlyFriend",
     [
       CollectibleType.COLLECTIBLE_BLUE_BABYS_ONLY_FRIEND,
       ModConfigMenuOptionType.BOOLEAN,
-      true,
     ],
   ],
   [
     "theMulligan",
-    [
-      CollectibleType.COLLECTIBLE_MULLIGAN,
-      ModConfigMenuOptionType.BOOLEAN,
-      true,
-    ],
+    [CollectibleType.COLLECTIBLE_MULLIGAN, ModConfigMenuOptionType.BOOLEAN],
   ],
 ];

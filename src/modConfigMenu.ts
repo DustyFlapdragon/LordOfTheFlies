@@ -13,25 +13,14 @@ export function register(): void {
 
   // account for Isaac Watcher
   deleteOldConfig();
+
+  // add the info menu panel
   addInfoMenuItem();
+
+  // add the various sub-menus
   addSubMenuItem("Items", ITEMS);
   addSubMenuItem("Trinkets", TRINKETS);
 
-  /* for (const [itemID, option] of itemsGivenToPlayer.entries()) { // for each item we have create a setting for it
-    // get the items name
-    const itemName = Isaac.GetItemConfig().GetCollectible(itemID).Name;
-    ModConfigMenu.AddSetting(CATEGORY_NAME, SUBCATEGORY_NAME, {
-      Type: ModConfigMenuOptionType.BOOLEAN,
-      CurrentSetting: () => itemsGivenToPlayer.get(itemID) as boolean,
-      Display: () =>
-        `${itemName}:${boolStatus(itemsGivenToPlayer.get(itemID) as boolean)}`,
-      OnChange: (newValue: boolean | number) => {
-        itemsGivenToPlayer.set(itemID, newValue as boolean);
-      },
-      Info: [`Spawn with ${itemName}.`],
-    });
-    // ModConfigMenu.AddSpace(CATEGORY_NAME, SUBCATEGORY_NAME);
-  } */
   Isaac.DebugString("LotF: Mod Config Menu Setup Complete");
 }
 function boolStatus(value: boolean) {
@@ -49,17 +38,22 @@ function deleteOldConfig() {
   }
 }
 
-// add submenus
+// Create the sub-menus and add the settings
 function addSubMenuItem(subMenuName: string, options: ConfigArray): void {
+  // for each of our options create a setting
   for (const [configName, array] of options) {
     const [itemID, optionType] = array;
     let optionName = "";
 
+    // if this is the items sub-menu then we use the collectible name
+    // else we use the trinket names
     if (subMenuName === "Items") {
       optionName = g.itemConfig.GetCollectible(itemID).Name;
     } else {
       optionName = g.itemConfig.GetTrinket(itemID).Name;
     }
+
+    // add the setting the the menu and change the global config if it changes
     ModConfigMenu.AddSetting(CATEGORY_NAME, subMenuName, {
       Type: optionType,
       CurrentSetting: () => g.config[configName as keyof Config],
@@ -71,6 +65,7 @@ function addSubMenuItem(subMenuName: string, options: ConfigArray): void {
       Info: [`Spawn with ${optionName}.`],
     });
   }
+  // formatting
   ModConfigMenu.AddSpace(CATEGORY_NAME, subMenuName);
 }
 

@@ -1,51 +1,40 @@
 import g from "../globals";
 import Config, { TRINKETS } from "../types/Config";
 
-// here we add all the collectibles to the player
+// Add all the Trinkets to the player
 export function postGameStarted(): void {
   // loop through our optional trinket and check if we should process them
   for (const [configName, array] of TRINKETS) {
     const [itemID] = array;
-    const player = Isaac.GetPlayer(0) as EntityPlayer;
-    const game = Game();
-    // has ModConfig been used to change our users preferences
+
+    // Check our config to see if the preference has been changed to false
     if (g.config[configName as keyof Config]) {
       // give player the trinket
-      player.AddTrinket(itemID, false);
+      g.p.AddTrinket(itemID, false);
+
       // smelt the trinket so its always active
-      player.UseActiveItem(CollectibleType.COLLECTIBLE_SMELTER);
+      g.p.UseActiveItem(CollectibleType.COLLECTIBLE_SMELTER);
+
       // remove the trinket from the pool
-      game.GetItemPool().RemoveTrinket(itemID);
+      g.g.GetItemPool().RemoveTrinket(itemID);
     }
   }
-  // for each trinket we have set to on, give that trinket to the player
-  /* for (const [itemID, option] of trinketsGivenToPlayer.entries()) {
-    const player = Isaac.GetPlayer(0) as EntityPlayer;
-    const game = Game();
-    if (option) {
-      // give player the trinket
-      player.AddTrinket(itemID, false);
-      // smelt the trinket so its always active
-      player.UseActiveItem(CollectibleType.COLLECTIBLE_SMELTER);
-      // remove the trinket from the pool
-      game.GetItemPool().RemoveTrinket(itemID);
-    }
-  } */
   Isaac.DebugString("LotF: Loaded Selected Trinkets");
 }
-// 100% chance of losing a trinket on taking spider damage
+
+// remove a trinket from the player when they take damage from spiders (100% chance)
 export function playerTakeDmg(): void {
+  // get a random trinket from the Trinkets array
   const randomTrinket = TRINKETS[Math.floor(Math.random() * TRINKETS.length)];
+
+  // make sure we have a random item
   if (randomTrinket !== null) {
+    // remove the random trinket from the player
     g.p.TryRemoveTrinket(randomTrinket[1][0]);
+
+    // remove the random trinket from the trinkets array
     TRINKETS.splice(TRINKETS.indexOf(randomTrinket), 1);
+
     Isaac.DebugString("LotF: lost LotF Item");
   }
-
-  /* const randomTrinket = getRandomEntryFromMap(trinketsGivenToPlayer);
-  if (randomTrinket !== null) {
-    player.TryRemoveTrinket(randomTrinket);
-    trinketsGivenToPlayer.delete(randomTrinket);
-    Isaac.DebugString("LotF: lost LotF trinket");
-  } */
 }
