@@ -2049,10 +2049,14 @@ end
 return ____exports
 end,
 ["saveData"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
+require("lualib_bundle");
 local ____exports = {}
 local json = require("json")
 local ____globals = require("globals")
 local g = ____globals.default
+function ____exports.setConfigOption(self, key, value)
+    g.config[key] = value
+end
 local mod = nil
 function ____exports.setMod(self, newMod)
     mod = newMod
@@ -2062,10 +2066,6 @@ function ____exports.save(self)
         error("\"saveDat.save()\" was called without the mod being initialized.")
     end
     local encodedData = json.encode(g.config)
-    Isaac.DebugString("testing save")
-    Isaac.DebugString(
-        tostring(g.config.angryFly)
-    )
     mod:SaveData(encodedData)
 end
 function ____exports.load(self)
@@ -2077,6 +2077,16 @@ function ____exports.load(self)
     end
     local saveData = json.decode(
         Isaac.LoadModData(mod)
+    )
+    __TS__ArrayForEach(
+        __TS__ObjectEntries(saveData),
+        function(____, ____bindingPattern0)
+            local key
+            key = ____bindingPattern0[1]
+            local value
+            value = ____bindingPattern0[2]
+            return ____exports.setConfigOption(nil, key, value)
+        end
     )
 end
 return ____exports
