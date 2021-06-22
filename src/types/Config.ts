@@ -29,6 +29,7 @@ export default class Config {
   obsessedFan = true;
   blueBabysOnlyFriend = true;
   theMulligan = true;
+  yoListen = true;
 }
 
 // the ConfigArray uses the key of Config
@@ -153,5 +154,9 @@ export const ITEMS: ConfigArray = [
   [
     "theMulligan",
     [CollectibleType.COLLECTIBLE_MULLIGAN, ModConfigMenuOptionType.BOOLEAN],
+  ],
+  [
+    "yoListen",
+    [CollectibleType.COLLECTIBLE_YO_LISTEN, ModConfigMenuOptionType.BOOLEAN],
   ],
 ];
