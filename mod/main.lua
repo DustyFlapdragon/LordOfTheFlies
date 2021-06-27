@@ -1834,7 +1834,7 @@ end
 end,
 ["constants"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 local ____exports = {}
-____exports.VERSION = "0.0.1"
+____exports.VERSION = "1.1.0"
 ____exports.spiderEnemies = {EntityType.ENTITY_SPIDER, EntityType.ENTITY_BIGSPIDER, EntityType.ENTITY_SPIDER_L2, EntityType.ENTITY_TICKING_SPIDER, EntityType.ENTITY_ROCK_SPIDER, EntityType.ENTITY_SWARM_SPIDER, EntityType.ENTITY_STRIDER, EntityType.ENTITY_MIGRAINE, EntityType.ENTITY_RAGLING, EntityType.ENTITY_BLISTER, EntityType.ENTITY_TWITCHY, EntityType.ENTITY_BABY_LONG_LEGS, EntityType.ENTITY_CRAZY_LONG_LEGS, EntityType.ENTITY_DADDYLONGLEGS, EntityType.ENTITY_WIDOW}
 return ____exports
 end,
@@ -1871,11 +1871,12 @@ ____exports.default = (function()
         self.obsessedFan = true
         self.blueBabysOnlyFriend = true
         self.theMulligan = true
+        self.yoListen = true
     end
     return Config
 end)()
 ____exports.TRINKETS = {{"locustOfWar", {TrinketType.TRINKET_LOCUST_OF_WRATH, 4}}, {"locustOfPestilence", {TrinketType.TRINKET_LOCUST_OF_PESTILENCE, 4}}, {"locustOfFamine", {TrinketType.TRINKET_LOCUST_OF_FAMINE, 4}}, {"locustOfDeath", {TrinketType.TRINKET_LOCUST_OF_DEATH, 4}}, {"locustOfConquest", {TrinketType.TRINKET_LOCUST_OF_CONQUEST, 4}}, {"appolyonsBestFriend", {TrinketType.TRINKET_APOLLYONS_BEST_FRIEND, 4}}}
-____exports.ITEMS = {{"smartFly", {CollectibleType.COLLECTIBLE_SMART_FLY, 4}}, {"psyFly", {CollectibleType.COLLECTIBLE_PSY_FLY, 4}}, {"lostFly", {CollectibleType.COLLECTIBLE_LOST_FLY, 4}}, {"papaFly", {CollectibleType.COLLECTIBLE_PAPA_FLY, 4}}, {"theSwarm", {CollectibleType.COLLECTIBLE_SWARM, 4}}, {"angryFly", {CollectibleType.COLLECTIBLE_ANGRY_FLY, 4}}, {"botFly", {CollectibleType.COLLECTIBLE_BOT_FLY, 4}}, {"fruityPlum", {CollectibleType.COLLECTIBLE_FRUITY_PLUM, 4}}, {"skatole", {CollectibleType.COLLECTIBLE_SKATOLE, 4}}, {"haloOfFlies", {CollectibleType.COLLECTIBLE_HALO_OF_FLIES, 4}}, {"distantAdmiration", {CollectibleType.COLLECTIBLE_DISTANT_ADMIRATION, 4}}, {"foreverAlone", {CollectibleType.COLLECTIBLE_FOREVER_ALONE, 4}}, {"bbf", {CollectibleType.COLLECTIBLE_BBF, 4}}, {"bigFan", {CollectibleType.COLLECTIBLE_BIG_FAN, 4}}, {"friendZone", {CollectibleType.COLLECTIBLE_FRIEND_ZONE, 4}}, {"obsessedFan", {CollectibleType.COLLECTIBLE_OBSESSED_FAN, 4}}, {"blueBabysOnlyFriend", {CollectibleType.COLLECTIBLE_BLUE_BABYS_ONLY_FRIEND, 4}}, {"theMulligan", {CollectibleType.COLLECTIBLE_MULLIGAN, 4}}}
+____exports.ITEMS = {{"smartFly", {CollectibleType.COLLECTIBLE_SMART_FLY, 4}}, {"psyFly", {CollectibleType.COLLECTIBLE_PSY_FLY, 4}}, {"lostFly", {CollectibleType.COLLECTIBLE_LOST_FLY, 4}}, {"papaFly", {CollectibleType.COLLECTIBLE_PAPA_FLY, 4}}, {"theSwarm", {CollectibleType.COLLECTIBLE_SWARM, 4}}, {"angryFly", {CollectibleType.COLLECTIBLE_ANGRY_FLY, 4}}, {"botFly", {CollectibleType.COLLECTIBLE_BOT_FLY, 4}}, {"fruityPlum", {CollectibleType.COLLECTIBLE_FRUITY_PLUM, 4}}, {"skatole", {CollectibleType.COLLECTIBLE_SKATOLE, 4}}, {"haloOfFlies", {CollectibleType.COLLECTIBLE_HALO_OF_FLIES, 4}}, {"distantAdmiration", {CollectibleType.COLLECTIBLE_DISTANT_ADMIRATION, 4}}, {"foreverAlone", {CollectibleType.COLLECTIBLE_FOREVER_ALONE, 4}}, {"bbf", {CollectibleType.COLLECTIBLE_BBF, 4}}, {"bigFan", {CollectibleType.COLLECTIBLE_BIG_FAN, 4}}, {"friendZone", {CollectibleType.COLLECTIBLE_FRIEND_ZONE, 4}}, {"obsessedFan", {CollectibleType.COLLECTIBLE_OBSESSED_FAN, 4}}, {"blueBabysOnlyFriend", {CollectibleType.COLLECTIBLE_BLUE_BABYS_ONLY_FRIEND, 4}}, {"theMulligan", {CollectibleType.COLLECTIBLE_MULLIGAN, 4}}, {"yoListen", {CollectibleType.COLLECTIBLE_YO_LISTEN, 4}}}
 return ____exports
 end,
 ["types.Globals"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]

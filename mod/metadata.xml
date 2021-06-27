@@ -1,8 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <name>LordOfTheFlies</name>
-  <directory>LordOfTheFlies</directory>
-  <description>LordOfTheFlies is a currently a work in progress.</description>
-  <version>1.0</version>
-  <visibility />
+    <name>LordOfTheFlies</name>
+    <directory>lordoftheflies</directory>
+    <id>2529197007</id>
+    <description>[h1][b]Lord Of The Flies[/b][/h1]
+
+[b]Features[/b]
+- This mod gives the first player all of the Fly Passive Items &amp; Trinkets and removes them from the item pool
+- Beelzebub Transformation.
+[list]
+    [*]Items
+    [list]
+        [*]Smart Fly
+        [*]Psy Fly
+        [*]Lost Fly
+        [*]Papa Fly
+        [*]The Swarm
+        [*]Angry Fly
+        [*]Bot Fly
+        [*]Fruity Fly
+        [*]Skatole
+        [*]Halo of Flies
+        [*]Distant Admiration
+        [*]Forever Alone
+        [*]BBF
+        [*]Big Fan
+        [*]Friend Zone
+        [*]Obsessed Fan
+        [*]??? Only Friend
+        [*]The Mulligan
+        [*]YO LISTEN!
+    [/list]
+    [*]Trinkets
+    [list]
+        [*]Locust of War
+        [*]Locust of Pestilence
+        [*]Locust of Famine
+        [*]Locust of Death
+        [*]Locust of Conquest
+        [*]Apollyons Best Friend
+    [/list]
+[/list]
+
+- As having the above is extemely OP the following happens when being hit by a spider enemy (it is still OP!)
+[list]
+    [*]100% chance of losing a trinket
+    [*]82-90% chance of losing a passive item (higher luck stat reduced % by maximum of 8)
+    [*]22-30% chance of losing a second passive item (higher luck stat reduced % by maximum of 8)
+[/list]
+
+- [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2487535818]Mod Config Menu Continued[/url] Support
+[list]
+    [*]Turn Items on or off
+    [*]Turn Trinkets on or off
+[/list]
+
+[b]Source[/b]
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2487535818]GitHub Repo[/url]
+-</description>
+    <version>1.1</version>
+    <visibility>Public</visibility>
+    <tag id="Items"/>
+    <tag id="Active Items"/>
+    <tag id="Trinkets"/>
 </metadata>

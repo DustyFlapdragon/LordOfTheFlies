@@ -1,5 +1,5 @@
 // The version is updated automatically by IsaacScript
-export const VERSION = "0.0.1";
+export const VERSION = "1.1.0";
 
 // array of in game spider enemies
 export const spiderEnemies = [
