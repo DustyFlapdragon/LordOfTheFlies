@@ -1,3 +1,4 @@
+--[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 
 local ____modules = {}
 local ____moduleCache = {}
@@ -39,6 +40,20 @@ function __TS__ArrayConcat(arr1, ...)
         end
     end
     return out
+end
+
+function __TS__ArrayEntries(array)
+    local key = 0
+    return {
+        [Symbol.iterator] = function(self)
+            return self
+        end,
+        next = function(self)
+            local result = {done = array[key + 1] == nil, value = {key, array[key + 1]}}
+            key = key + 1
+            return result
+        end
+    }
 end
 
 function __TS__ArrayEvery(arr, callbackfn)
@@ -1831,13 +1846,13 @@ function __TS__TypeOf(value)
     end
 end
 
-end,
+ end,
 ["constants"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 local ____exports = {}
 ____exports.VERSION = "1.1.0"
 ____exports.spiderEnemies = {EntityType.ENTITY_SPIDER, EntityType.ENTITY_BIGSPIDER, EntityType.ENTITY_SPIDER_L2, EntityType.ENTITY_TICKING_SPIDER, EntityType.ENTITY_ROCK_SPIDER, EntityType.ENTITY_SWARM_SPIDER, EntityType.ENTITY_STRIDER, EntityType.ENTITY_MIGRAINE, EntityType.ENTITY_RAGLING, EntityType.ENTITY_BLISTER, EntityType.ENTITY_TWITCHY, EntityType.ENTITY_BABY_LONG_LEGS, EntityType.ENTITY_CRAZY_LONG_LEGS, EntityType.ENTITY_DADDYLONGLEGS, EntityType.ENTITY_WIDOW}
 return ____exports
-end,
+ end,
 ["types.Config"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 require("lualib_bundle");
 local ____exports = {}
@@ -1878,7 +1893,7 @@ end)()
 ____exports.TRINKETS = {{"locustOfWar", {TrinketType.TRINKET_LOCUST_OF_WRATH, 4}}, {"locustOfPestilence", {TrinketType.TRINKET_LOCUST_OF_PESTILENCE, 4}}, {"locustOfFamine", {TrinketType.TRINKET_LOCUST_OF_FAMINE, 4}}, {"locustOfDeath", {TrinketType.TRINKET_LOCUST_OF_DEATH, 4}}, {"locustOfConquest", {TrinketType.TRINKET_LOCUST_OF_CONQUEST, 4}}, {"appolyonsBestFriend", {TrinketType.TRINKET_APOLLYONS_BEST_FRIEND, 4}}}
 ____exports.ITEMS = {{"smartFly", {CollectibleType.COLLECTIBLE_SMART_FLY, 4}}, {"psyFly", {CollectibleType.COLLECTIBLE_PSY_FLY, 4}}, {"lostFly", {CollectibleType.COLLECTIBLE_LOST_FLY, 4}}, {"papaFly", {CollectibleType.COLLECTIBLE_PAPA_FLY, 4}}, {"theSwarm", {CollectibleType.COLLECTIBLE_SWARM, 4}}, {"angryFly", {CollectibleType.COLLECTIBLE_ANGRY_FLY, 4}}, {"botFly", {CollectibleType.COLLECTIBLE_BOT_FLY, 4}}, {"fruityPlum", {CollectibleType.COLLECTIBLE_FRUITY_PLUM, 4}}, {"skatole", {CollectibleType.COLLECTIBLE_SKATOLE, 4}}, {"haloOfFlies", {CollectibleType.COLLECTIBLE_HALO_OF_FLIES, 4}}, {"distantAdmiration", {CollectibleType.COLLECTIBLE_DISTANT_ADMIRATION, 4}}, {"foreverAlone", {CollectibleType.COLLECTIBLE_FOREVER_ALONE, 4}}, {"bbf", {CollectibleType.COLLECTIBLE_BBF, 4}}, {"bigFan", {CollectibleType.COLLECTIBLE_BIG_FAN, 4}}, {"friendZone", {CollectibleType.COLLECTIBLE_FRIEND_ZONE, 4}}, {"obsessedFan", {CollectibleType.COLLECTIBLE_OBSESSED_FAN, 4}}, {"blueBabysOnlyFriend", {CollectibleType.COLLECTIBLE_BLUE_BABYS_ONLY_FRIEND, 4}}, {"theMulligan", {CollectibleType.COLLECTIBLE_MULLIGAN, 4}}, {"yoListen", {CollectibleType.COLLECTIBLE_YO_LISTEN, 4}}}
 return ____exports
-end,
+ end,
 ["types.Globals"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 require("lualib_bundle");
 local ____exports = {}
@@ -1908,7 +1923,7 @@ ____exports.default = (function()
     return Globals
 end)()
 return ____exports
-end,
+ end,
 ["globals"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 require("lualib_bundle");
 local ____exports = {}
@@ -1917,7 +1932,7 @@ local Globals = ____Globals.default
 local globals = __TS__New(Globals)
 ____exports.default = globals
 return ____exports
-end,
+ end,
 ["features.managePlayerItems"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 require("lualib_bundle");
 local ____exports = {}
@@ -1968,7 +1983,7 @@ function ____exports.playerTakeDmg(self)
     removeRandomItem(nil, g.itemsAvailable, 0.3, luck / 100)
 end
 return ____exports
-end,
+ end,
 ["features.managePlayerTrinkets"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 require("lualib_bundle");
 local ____exports = {}
@@ -2009,7 +2024,7 @@ function ____exports.playerTakeDmg(self)
     end
 end
 return ____exports
-end,
+ end,
 ["callbacks.playerTakeDmg"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 require("lualib_bundle");
 local ____exports = {}
@@ -2023,26 +2038,25 @@ function ____exports.main(self, tookDmg, _dmgAmount, _dmgFlags, dmgSource, _dmgC
         managePlayerTrinkets:playerTakeDmg()
         Isaac.DebugString("LotF: Callback triggered: ENTITY_TAKE_DMG")
     end
-    return nil
 end
 return ____exports
-end,
+ end,
 ["misc"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 local ____exports = {}
 local ____globals = require("globals")
 local g = ____globals.default
 function ____exports.isNewStandardGame(self, isContinue)
-    if ((g.g:IsGreedMode() == false) and (g.g.Challenge == Challenge.CHALLENGE_NULL)) and (isContinue == false) then
+    if ((not g.g:IsGreedMode()) and (g.g.Challenge == Challenge.CHALLENGE_NULL)) and (not isContinue) then
         return true
     end
     return false
 end
 return ____exports
-end,
+ end,
 ["types.SaveData"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 local ____exports = {}
 return ____exports
-end,
+ end,
 ["saveData"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 require("lualib_bundle");
 local ____exports = {}
@@ -2101,7 +2115,7 @@ function ____exports.loadPreviousGameData(self)
     g.itemsAvailable = saveData.itemsAvailable
 end
 return ____exports
-end,
+ end,
 ["callbacks.postGameStarted"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 local ____exports = {}
 local managePlayerItems = require("features.managePlayerItems")
@@ -2110,7 +2124,7 @@ local ____misc = require("misc")
 local isNewStandardGame = ____misc.isNewStandardGame
 local saveData = require("saveData")
 function ____exports.main(self, isContinue)
-    if isContinue == true then
+    if isContinue then
         saveData:loadPreviousGameData()
     end
     if isNewStandardGame(nil, isContinue) then
@@ -2120,7 +2134,7 @@ function ____exports.main(self, isContinue)
     end
 end
 return ____exports
-end,
+ end,
 ["callbacks.postPlayerInit"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 local ____exports = {}
 local ____globals = require("globals")
@@ -2129,7 +2143,7 @@ function ____exports.main(self, player)
     g.p = player
 end
 return ____exports
-end,
+ end,
 ["callbacks.preGameExit"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 local ____exports = {}
 local saveData = require("saveData")
@@ -2137,7 +2151,7 @@ function ____exports.main(self)
     saveData:save()
 end
 return ____exports
-end,
+ end,
 ["modConfigMenu"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 local ____exports = {}
 local ____constants = require("constants")
@@ -2228,7 +2242,7 @@ function ____exports.register(self)
     Isaac.DebugString("LotF: Mod Config Menu Setup Complete")
 end
 return ____exports
-end,
+ end,
 ["main"] = function() --[[ Generated with https://github.com/TypeScriptToLua/TypeScriptToLua ]]
 local ____exports = {}
 local playerTakeDmg = require("callbacks.playerTakeDmg")
@@ -2247,6 +2261,6 @@ LordOfTheFlies:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, preGameExit.main)
 modConfigMenu:register()
 Isaac.DebugString("LordOfTheFlies initialized.")
 return ____exports
-end,
+ end,
 }
 return require("main")

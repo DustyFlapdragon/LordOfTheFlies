@@ -8,7 +8,7 @@ export default class Globals {
   r = Game().GetRoom();
   // note player will be null as it doesn't yet exist
   // make sure we set it in POST_PLAYER_INIT
-  p = Isaac.GetPlayer(0) as EntityPlayer;
+  p = Isaac.GetPlayer(0);
   itemPool = Game().GetItemPool();
   itemConfig = Isaac.GetItemConfig();
   config = new Config();

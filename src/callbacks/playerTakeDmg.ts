@@ -10,7 +10,7 @@ export function main(
   _dmgFlags: DamageFlag,
   dmgSource: EntityRef,
   _dmgCountdownFrames: int,
-): boolean | null {
+): boolean | void {
   if (
     tookDmg.Type === 1 &&
     (spiderEnemies.includes(dmgSource.Type) ||
@@ -20,5 +20,4 @@ export function main(
     managePlayerTrinkets.playerTakeDmg();
     Isaac.DebugString("LotF: Callback triggered: ENTITY_TAKE_DMG");
   }
-  return null;
 }
